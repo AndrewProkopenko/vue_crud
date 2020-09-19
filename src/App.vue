@@ -1,28 +1,38 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <div id="app" class="container mt-3"> 
+      <nav class="navbar navbar-expand-md bg-dark navbar-dark mb-3 rounded shadow">
+        <ul class="navbar-nav">
+          <li class="nav-item" :class="{ active: $route.path === '/' }">
+            <router-link :to='{name: "home"}' class="nav-link">Home</router-link>
+          </li>
+          <li class="nav-item" :class="{ active: $route.path === '/posts' }">
+            <router-link :to='{name: "posts"}' class="nav-link">Posts</router-link>
+          </li>
+          <li class="nav-item" :class="{ active: $route.path === '/create' }">
+            <router-link :to='{name: "create"}' class="nav-link">Create Post</router-link>
+          </li>
+        </ul>
+      </nav>
+     <transition name='fade'>
+        <router-view></router-view>  
+     </transition>
+  </div> 
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
+<script> 
+ 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+  name: 'App'  
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+ 
+<style scoped>
+  .fade-enter, .fade-leave { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .fade-enter-active, .fade-leave-active {  
+    transition: 300ms ease-out;
+  }
 </style>
